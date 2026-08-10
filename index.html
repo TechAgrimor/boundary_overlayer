@@ -131,9 +131,9 @@
         const layersData = [
   {
     "engine": "PyShp (pyshp)",
-    "file_name": "seletar_buffer_20m.shp",
-    "file_path": "C:\\Users\\User\\Documents\\GANESSA\\Code\\Scripting Folder\\KML_overlay\\boundary\\seletar_buffer_20m.shp",
-    "layer_name": "seletar_buffer_20m",
+    "file_name": "seletar_20m.shp",
+    "file_path": "C:\\Users\\User\\Documents\\GANESSA\\Code\\Scripting Folder\\KML_overlay\\boundary\\seletar_20m.shp",
+    "layer_name": "seletar_20m",
     "feature_count": 1,
     "geometry_types": [
       "POLYGON"
@@ -1693,9 +1693,9 @@
   },
   {
     "engine": "PyShp (pyshp)",
-    "file_name": "simco_buffer_20m.shp",
-    "file_path": "C:\\Users\\User\\Documents\\GANESSA\\Code\\Scripting Folder\\KML_overlay\\boundary\\simco_buffer_20m.shp",
-    "layer_name": "simco_buffer_20m",
+    "file_name": "simco_20m.shp",
+    "file_path": "C:\\Users\\User\\Documents\\GANESSA\\Code\\Scripting Folder\\KML_overlay\\boundary\\simco_20m.shp",
+    "layer_name": "simco_20m",
     "feature_count": 1,
     "geometry_types": [
       "POLYGON"
@@ -4325,10 +4325,10 @@
 
         // Layer Controls
         const baseMaps = {
-            "CartoDB Dark Matter": darkBasemap,
-            "CartoDB Positron (Light)": lightBasemap,
+            "Dark Matter": darkBasemap,
+            "Positron (Light)": lightBasemap,
             "OpenStreetMap": osmBasemap,
-            "Esri Satellite": satelliteBasemap
+            "Satellite": satelliteBasemap
         };
 
         const overlayMaps = {};
@@ -4358,26 +4358,6 @@
                     };
                 },
                 onEachFeature: function(feature, layer) {
-                    // Hover highlight effect
-                    layer.on({
-                        mouseover: function(e) {
-                            const l = e.target;
-                            l.setStyle({
-                                weight: 4.5,
-                                fillOpacity: Math.min(1.0, currentOpacity + 0.3)
-                            });
-                            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-                                l.bringToFront();
-                            }
-                        },
-                        mouseout: function(e) {
-                            e.target.setStyle({
-                                weight: 2.5,
-                                fillOpacity: currentOpacity
-                            });
-                        }
-                    });
-
                     // Popup Content
                     if (feature.properties) {
                         let popHtml = `<div class="popup-title"><i class="fa-solid fa-draw-polygon"></i> ${ldata.file_name}</div>`;
