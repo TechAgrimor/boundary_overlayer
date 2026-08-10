@@ -4326,7 +4326,7 @@
 
         // Track layers & opacity
         const allGeoJsonLayers = [];
-        let currentOpacity = 0.35;
+        let currentOpacity = 0.0;
 
         // Process Layers
         layersData.forEach((ldata, index) => {
@@ -4373,9 +4373,9 @@
             opacityDiv.innerHTML = `
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 4px; font-weight:600; color:#38bdf8;">
                     <span><i class="fa-solid fa-circle-half-stroke"></i> Fill Opacity</span>
-                    <span id="opacityValue">35%</span>
+                    <span id="opacityValue">0%</span>
                 </div>
-                <input type="range" id="opacityRange" min="0" max="100" value="35" style="width:100%; cursor:pointer; accent-color:#38bdf8;" oninput="changeOpacity(this.value)">
+                <input type="range" id="opacityRange" min="0" max="100" value="0" style="width:100%; cursor:pointer; accent-color:#38bdf8;" oninput="changeOpacity(this.value)">
             `;
             layerControlContainer.appendChild(opacityDiv);
         }
