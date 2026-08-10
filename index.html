@@ -131,9 +131,9 @@
         const layersData = [
   {
     "engine": "PyShp (pyshp)",
-    "file_name": "seletar_20m.shp",
-    "file_path": "C:\\Users\\User\\Documents\\GANESSA\\Code\\Scripting Folder\\KML_overlay\\boundary\\seletar_20m.shp",
-    "layer_name": "seletar_20m",
+    "file_name": "seletar boundary with 20m.shp",
+    "file_path": "C:\\Users\\User\\Documents\\GANESSA\\Code\\Scripting Folder\\KML_overlay\\boundary\\seletar boundary with 20m.shp",
+    "layer_name": "seletar boundary with 20m",
     "feature_count": 1,
     "geometry_types": [
       "POLYGON"
@@ -1693,9 +1693,9 @@
   },
   {
     "engine": "PyShp (pyshp)",
-    "file_name": "simco_20m.shp",
-    "file_path": "C:\\Users\\User\\Documents\\GANESSA\\Code\\Scripting Folder\\KML_overlay\\boundary\\simco_20m.shp",
-    "layer_name": "simco_20m",
+    "file_name": "simco boundary with 20m.shp",
+    "file_path": "C:\\Users\\User\\Documents\\GANESSA\\Code\\Scripting Folder\\KML_overlay\\boundary\\simco boundary with 20m.shp",
+    "layer_name": "simco boundary with 20m",
     "feature_count": 1,
     "geometry_types": [
       "POLYGON"
@@ -4345,6 +4345,7 @@
         // Process Layers
         layersData.forEach((ldata, index) => {
             const layerColor = colorPalette[index % colorPalette.length];
+            const displayName = (ldata.layer_name || ldata.file_name).replace(/\.shp$/i, '');
             
             // Create Leaflet GeoJSON layer
             const geoJsonLayer = L.geoJSON(ldata.geojson, {
@@ -4360,7 +4361,7 @@
                 onEachFeature: function(feature, layer) {
                     // Popup Content
                     if (feature.properties) {
-                        let popHtml = `<div class="popup-title"><i class="fa-solid fa-draw-polygon"></i> ${ldata.file_name}</div>`;
+                        let popHtml = `<div class="popup-title"><i class="fa-solid fa-draw-polygon"></i> ${displayName}</div>`;
                         popHtml += `<table class="popup-table">`;
                         for (let k in feature.properties) {
                             popHtml += `<tr><td class="key">${k}:</td><td>${feature.properties[k] !== null ? feature.properties[k] : 'N/A'}</td></tr>`;
@@ -4372,7 +4373,7 @@
             }).addTo(map);
 
             allGeoJsonLayers.push(geoJsonLayer);
-            overlayMaps[`<span style="color:${layerColor};">■</span> ${ldata.file_name}`] = geoJsonLayer;
+            overlayMaps[`<span style="color:${layerColor};">■</span> ${displayName}`] = geoJsonLayer;
         });
 
         // Add Layer Control widget to top right
