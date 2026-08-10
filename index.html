@@ -4338,6 +4338,10 @@
             "#38bdf8", "#f43f5e", "#10b981", "#fbbf24", "#a855f7", "#ec4899", "#06b6d4"
         ];
 
+        // Track layers & opacity
+        const allGeoJsonLayers = [];
+        let currentOpacity = 0.35;
+
         // Process Layers
         layersData.forEach((ldata, index) => {
             const layerColor = colorPalette[index % colorPalette.length];
@@ -4350,7 +4354,7 @@
                         weight: 2.5,
                         opacity: 0.9,
                         fillColor: layerColor,
-                        fillOpacity: 0.35
+                        fillOpacity: currentOpacity
                     };
                 },
                 onEachFeature: function(feature, layer) {
@@ -4360,14 +4364,17 @@
                             const l = e.target;
                             l.setStyle({
                                 weight: 4.5,
-                                fillOpacity: 0.65
+                                fillOpacity: Math.min(1.0, currentOpacity + 0.3)
                             });
                             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                                 l.bringToFront();
                             }
                         },
                         mouseout: function(e) {
-                            geoJsonLayer.resetStyle(e.target);
+                            e.target.setStyle({
+                                weight: 2.5,
+                                fillOpacity: currentOpacity
+                            });
                         }
                     });
 
@@ -4384,11 +4391,39 @@
                 }
             }).addTo(map);
 
+            allGeoJsonLayers.push(geoJsonLayer);
             overlayMaps[`<span style="color:${layerColor};">■</span> ${ldata.file_name}`] = geoJsonLayer;
         });
 
         // Add Layer Control widget to top right
-        L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
+        const layerControlWidget = L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
+
+        // Inject Opacity Slider inside the Layer Control box
+        const layerControlContainer = document.querySelector('.leaflet-control-layers-list');
+        if (layerControlContainer) {
+            const opacityDiv = document.createElement('div');
+            opacityDiv.style.cssText = 'margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.8rem;';
+            opacityDiv.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 4px; font-weight:600; color:#38bdf8;">
+                    <span><i class="fa-solid fa-circle-half-stroke"></i> Fill Opacity</span>
+                    <span id="opacityValue">35%</span>
+                </div>
+                <input type="range" id="opacityRange" min="0" max="100" value="35" style="width:100%; cursor:pointer; accent-color:#38bdf8;" oninput="changeOpacity(this.value)">
+            `;
+            layerControlContainer.appendChild(opacityDiv);
+        }
+
+        // Opacity Change Handler
+        function changeOpacity(val) {
+            const opacity = parseFloat(val) / 100;
+            document.getElementById('opacityValue').innerText = val + '%';
+            currentOpacity = opacity;
+            allGeoJsonLayers.forEach(layer => {
+                layer.setStyle({
+                    fillOpacity: opacity
+                });
+            });
+        }
 
         // Track cursor coordinates
         map.on('mousemove', function(e) {
