@@ -122,6 +122,39 @@
             color: var(--accent-green);
         }
 
+        /* Leaflet Control Box Dark Glassmorphism */
+        .leaflet-control-layers {
+            background: rgba(15, 23, 42, 0.94) !important;
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            color: #f8fafc !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-radius: 14px !important;
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.6) !important;
+            padding: 14px 16px !important;
+            min-width: 320px !important;
+        }
+
+        .leaflet-control-layers label {
+            color: #f8fafc !important;
+            font-weight: 500 !important;
+            font-size: 0.85rem !important;
+            cursor: pointer !important;
+            margin-bottom: 5px !important;
+        }
+
+        .leaflet-control-layers-separator {
+            border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+            margin: 10px 0 !important;
+        }
+
+        .leaflet-control-layers input[type="checkbox"],
+        .leaflet-control-layers input[type="radio"] {
+            accent-color: #38bdf8 !important;
+            cursor: pointer !important;
+            transform: scale(1.1);
+        }
+
         /* Popup customization */
         .leaflet-popup-content-wrapper {
             background: var(--bg-secondary) !important;
@@ -174,11 +207,27 @@
         // Data injected from Python pipeline
         const layersData = [
   {
-    "file_name": "Seletar boundary with 20m.shp",
-    "layer_name": "Seletar boundary with 20m",
+    "file_name": "Seletar boundary with 20m buffer.shp",
+    "layer_name": "Seletar boundary with 20m buffer",
     "feature_count": 3,
     "geometry_types": [
       "Polygon"
+    ],
+    "total_area_ha": 122.53411465980238,
+    "total_area_ha_str": "122.53 ha",
+    "parts_summary": [
+      {
+        "part_label": "Part 1 of 3",
+        "area_ha": "14.43 ha"
+      },
+      {
+        "part_label": "Part 2 of 3",
+        "area_ha": "92.66 ha"
+      },
+      {
+        "part_label": "Part 3 of 3",
+        "area_ha": "15.44 ha"
+      }
     ],
     "bounds_wgs84": {
       "min_lat": 5.740198771663716,
@@ -667,7 +716,7 @@
             ]
           },
           "properties": {
-            "Boundary_Name": "Seletar boundary with 20m",
+            "Boundary_Name": "Seletar boundary with 20m buffer",
             "Part_Label": "Part 1 of 3",
             "Area_m2_raw": 144324.07912795577,
             "Area_m2": "144,324.08 m\u00b2",
@@ -1276,7 +1325,7 @@
             ]
           },
           "properties": {
-            "Boundary_Name": "Seletar boundary with 20m",
+            "Boundary_Name": "Seletar boundary with 20m buffer",
             "Part_Label": "Part 2 of 3",
             "Area_m2_raw": 926606.2319337405,
             "Area_m2": "926,606.23 m\u00b2",
@@ -1749,7 +1798,7 @@
             ]
           },
           "properties": {
-            "Boundary_Name": "Seletar boundary with 20m",
+            "Boundary_Name": "Seletar boundary with 20m buffer",
             "Part_Label": "Part 3 of 3",
             "Area_m2_raw": 154410.83553632762,
             "Area_m2": "154,410.84 m\u00b2",
@@ -1764,11 +1813,43 @@
     }
   },
   {
-    "file_name": "Simco boundary with 20m.shp",
-    "layer_name": "Simco boundary with 20m",
+    "file_name": "Simco boundary with 20m buffer.shp",
+    "layer_name": "Simco boundary with 20m buffer",
     "feature_count": 7,
     "geometry_types": [
       "Polygon"
+    ],
+    "total_area_ha": 710.0227636664056,
+    "total_area_ha_str": "710.02 ha",
+    "parts_summary": [
+      {
+        "part_label": "Part 1 of 7",
+        "area_ha": "3.13 ha"
+      },
+      {
+        "part_label": "Part 2 of 7",
+        "area_ha": "645.14 ha"
+      },
+      {
+        "part_label": "Part 3 of 7",
+        "area_ha": "13.87 ha"
+      },
+      {
+        "part_label": "Part 4 of 7",
+        "area_ha": "18.51 ha"
+      },
+      {
+        "part_label": "Part 5 of 7",
+        "area_ha": "2.97 ha"
+      },
+      {
+        "part_label": "Part 6 of 7",
+        "area_ha": "3.74 ha"
+      },
+      {
+        "part_label": "Part 7 of 7",
+        "area_ha": "22.66 ha"
+      }
     ],
     "bounds_wgs84": {
       "min_lat": 5.728506137550784,
@@ -1897,7 +1978,7 @@
             ]
           },
           "properties": {
-            "Boundary_Name": "Simco boundary with 20m",
+            "Boundary_Name": "Simco boundary with 20m buffer",
             "Part_Label": "Part 1 of 7",
             "Area_m2_raw": 31323.528292994924,
             "Area_m2": "31,323.53 m\u00b2",
@@ -3702,7 +3783,7 @@
             ]
           },
           "properties": {
-            "Boundary_Name": "Simco boundary with 20m",
+            "Boundary_Name": "Simco boundary with 20m buffer",
             "Part_Label": "Part 2 of 7",
             "Area_m2_raw": 6451394.2303123325,
             "Area_m2": "6,451,394.23 m\u00b2",
@@ -3899,7 +3980,7 @@
             ]
           },
           "properties": {
-            "Boundary_Name": "Simco boundary with 20m",
+            "Boundary_Name": "Simco boundary with 20m buffer",
             "Part_Label": "Part 3 of 7",
             "Area_m2_raw": 138699.38386936218,
             "Area_m2": "138,699.38 m\u00b2",
@@ -3960,7 +4041,7 @@
             ]
           },
           "properties": {
-            "Boundary_Name": "Simco boundary with 20m",
+            "Boundary_Name": "Simco boundary with 20m buffer",
             "Part_Label": "Part 4 of 7",
             "Area_m2_raw": 185101.3999521106,
             "Area_m2": "185,101.40 m\u00b2",
@@ -4069,7 +4150,7 @@
             ]
           },
           "properties": {
-            "Boundary_Name": "Simco boundary with 20m",
+            "Boundary_Name": "Simco boundary with 20m buffer",
             "Part_Label": "Part 5 of 7",
             "Area_m2_raw": 29688.735285954026,
             "Area_m2": "29,688.74 m\u00b2",
@@ -4202,7 +4283,7 @@
             ]
           },
           "properties": {
-            "Boundary_Name": "Simco boundary with 20m",
+            "Boundary_Name": "Simco boundary with 20m buffer",
             "Part_Label": "Part 6 of 7",
             "Area_m2_raw": 37386.00054872154,
             "Area_m2": "37,386.00 m\u00b2",
@@ -4451,7 +4532,7 @@
             ]
           },
           "properties": {
-            "Boundary_Name": "Simco boundary with 20m",
+            "Boundary_Name": "Simco boundary with 20m buffer",
             "Part_Label": "Part 7 of 7",
             "Area_m2_raw": 226634.35840257912,
             "Area_m2": "226,634.36 m\u00b2",
@@ -4585,19 +4666,92 @@
         // Add Layer Control widget to top right
         const layerControlWidget = L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
 
-        // Inject Opacity Slider inside the Layer Control box (Default 0%)
+        // Inject Opacity Slider & Simplified Area Summary inside the Layer Control box
         const layerControlContainer = document.querySelector('.leaflet-control-layers-list');
         if (layerControlContainer) {
+            // 1. Opacity Slider
             const opacityDiv = document.createElement('div');
-            opacityDiv.style.cssText = 'margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.8rem;';
+            opacityDiv.style.cssText = 'margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.82rem;';
             opacityDiv.innerHTML = `
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 4px; font-weight:600; color:#38bdf8;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px; font-weight:600; color:#38bdf8;">
                     <span><i class="fa-solid fa-circle-half-stroke"></i> Fill Opacity</span>
-                    <span id="opacityValue">0%</span>
+                    <span id="opacityValue" style="color:#38bdf8; font-weight:700; font-family:'JetBrains Mono', monospace;">0%</span>
                 </div>
                 <input type="range" id="opacityRange" min="0" max="100" value="0" style="width:100%; cursor:pointer; accent-color:#38bdf8;" oninput="changeOpacity(this.value)">
             `;
             layerControlContainer.appendChild(opacityDiv);
+
+            // 2. Area Summary Table (Hectares) for Boundaries & Individual Parts
+            let mainTableRows = '';
+            let partsBreakdownRows = '';
+
+            layersData.forEach((ldata, index) => {
+                const layerColor = colorPalette[index % colorPalette.length];
+                
+                mainTableRows += `
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                        <td style="padding:6px 8px; font-weight:500; color:#f8fafc;">
+                            <span style="color:${layerColor}; font-size:0.9rem;">■</span> ${ldata.layer_name}
+                        </td>
+                        <td style="padding:6px 8px; text-align:center; color:#cbd5e1; font-family:'JetBrains Mono', monospace;">${ldata.feature_count}</td>
+                        <td style="padding:6px 8px; text-align:right; font-weight:700; color:#34d399; font-family:'JetBrains Mono', monospace;">${ldata.total_area_ha_str}</td>
+                    </tr>
+                `;
+
+                if (ldata.parts_summary) {
+                    ldata.parts_summary.forEach(p => {
+                        partsBreakdownRows += `
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                                <td style="padding:5px 8px; font-size:0.75rem; color:#cbd5e1;">
+                                    <span style="color:${layerColor};">■</span> ${ldata.layer_name} (${p.part_label})
+                                </td>
+                                <td style="padding:5px 8px; text-align:right; font-weight:600; color:#34d399; font-family:'JetBrains Mono', monospace; font-size:0.75rem;">${p.area_ha}</td>
+                            </tr>
+                        `;
+                    });
+                }
+            });
+
+            const summaryDiv = document.createElement('div');
+            summaryDiv.style.cssText = 'margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.15);';
+            summaryDiv.innerHTML = `
+                <div style="font-weight:700; color:#38bdf8; font-size:0.85rem; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+                    <i class="fa-solid fa-table-list"></i> Area Summary (ha)
+                </div>
+                
+                <!-- Main Layer Summary Table -->
+                <table style="width:100%; border-collapse:collapse; font-size:0.8rem; margin-bottom:10px; background:rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.1); border-radius:8px; overflow:hidden;">
+                    <thead>
+                        <tr style="background:rgba(15,23,42,0.8); border-bottom:1px solid rgba(255,255,255,0.15); color:#94a3b8; text-align:left;">
+                            <th style="padding:6px 8px; font-weight:600;">Boundary</th>
+                            <th style="padding:6px 8px; text-align:center; font-weight:600;">Parts</th>
+                            <th style="padding:6px 8px; text-align:right; font-weight:600;">Total (ha)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${mainTableRows}
+                    </tbody>
+                </table>
+
+                <!-- Expandable Individual Parts Breakdown Table -->
+                <details style="font-size:0.78rem; cursor:pointer;">
+                    <summary style="color:#38bdf8; font-weight:600; padding:4px 0;">
+                        <i class="fa-solid fa-list-ol"></i> View Individual Parts Breakdown
+                    </summary>
+                    <table style="width:100%; border-collapse:collapse; margin-top:8px; background:rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.1); border-radius:8px; overflow:hidden;">
+                        <thead>
+                            <tr style="background:rgba(15,23,42,0.8); border-bottom:1px solid rgba(255,255,255,0.15); color:#94a3b8; text-align:left;">
+                                <th style="padding:5px 8px; font-weight:600;">Polygon Part</th>
+                                <th style="padding:5px 8px; text-align:right; font-weight:600;">Area (ha)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${partsBreakdownRows}
+                        </tbody>
+                    </table>
+                </details>
+            `;
+            layerControlContainer.appendChild(summaryDiv);
         }
 
         // Opacity Change Handler
