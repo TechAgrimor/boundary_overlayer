@@ -131,9 +131,9 @@
         const layersData = [
   {
     "engine": "PyShp (pyshp)",
-    "file_name": "seletar boundary with 20m.shp",
-    "file_path": "C:\\Users\\User\\Documents\\GANESSA\\Code\\Scripting Folder\\KML_overlay\\boundary\\seletar boundary with 20m.shp",
-    "layer_name": "seletar boundary with 20m",
+    "file_name": "Seletar boundary with 20m.shp",
+    "file_path": "C:\\Users\\User\\Documents\\GANESSA\\Code\\Scripting Folder\\KML_overlay\\boundary\\Seletar boundary with 20m.shp",
+    "layer_name": "Seletar boundary with 20m",
     "feature_count": 1,
     "geometry_types": [
       "POLYGON"
@@ -1693,9 +1693,9 @@
   },
   {
     "engine": "PyShp (pyshp)",
-    "file_name": "simco boundary with 20m.shp",
-    "file_path": "C:\\Users\\User\\Documents\\GANESSA\\Code\\Scripting Folder\\KML_overlay\\boundary\\simco boundary with 20m.shp",
-    "layer_name": "simco boundary with 20m",
+    "file_name": "Simco boundary with 20m.shp",
+    "file_path": "C:\\Users\\User\\Documents\\GANESSA\\Code\\Scripting Folder\\KML_overlay\\boundary\\Simco boundary with 20m.shp",
+    "layer_name": "Simco boundary with 20m",
     "feature_count": 1,
     "geometry_types": [
       "POLYGON"
@@ -4295,16 +4295,9 @@
         const initialBbox = [[5.728506137550784, 100.45485848188028], [5.764178683935393, 100.51857452461093]];
 
         // Basemap definitions
-        const darkBasemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            maxZoom: 20,
-            subdomains: 'abcd',
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        });
-
-        const lightBasemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            maxZoom: 20,
-            subdomains: 'abcd',
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        const satelliteBasemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 19,
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         });
 
         const osmBasemap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -4312,23 +4305,16 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         });
 
-        const satelliteBasemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            maxZoom: 19,
-            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-        });
-
-        // Initialize Map
+        // Initialize Map (Esri Satellite by default)
         const map = L.map('map', {
             zoomControl: true,
-            layers: [darkBasemap]
+            layers: [satelliteBasemap]
         }).fitBounds(initialBbox);
 
         // Layer Controls
         const baseMaps = {
-            "Dark Matter": darkBasemap,
-            "Positron (Light)": lightBasemap,
-            "OpenStreetMap": osmBasemap,
-            "Satellite": satelliteBasemap
+            "Satellite": satelliteBasemap,
+            "OpenStreetMap": osmBasemap
         };
 
         const overlayMaps = {};
