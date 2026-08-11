@@ -210,7 +210,7 @@
 
         <!-- Cursor Coordinates Bar -->
         <div class="coords-bar" id="coordsBar">
-            Lat: -- | Lon: -- | Zoom: --
+            Map CRS: WGS84 (EPSG:4326) | Lat: -- | Lon: -- | Zoom: --
         </div>
     </div>
 
@@ -220,6 +220,7 @@
   {
     "file_name": "Seletar boundary with 20m buffer.shp",
     "layer_name": "Seletar boundary with 20m buffer",
+    "source_crs": "WGS84 (EPSG:4326)",
     "feature_count": 3,
     "geometry_types": [
       "Polygon"
@@ -853,6 +854,7 @@
             "Part_Key": "part_0_1",
             "Boundary_Name": "Seletar boundary with 20m buffer",
             "Part_Label": "Part 1 of 3",
+            "Source_CRS": "WGS84 (EPSG:4326)",
             "Area_m2_raw": 926606.2319337405,
             "Area_m2": "926,606.23 m\u00b2",
             "Area_ha": "92.6606 ha",
@@ -1327,6 +1329,7 @@
             "Part_Key": "part_0_2",
             "Boundary_Name": "Seletar boundary with 20m buffer",
             "Part_Label": "Part 2 of 3",
+            "Source_CRS": "WGS84 (EPSG:4326)",
             "Area_m2_raw": 154410.83553632762,
             "Area_m2": "154,410.84 m\u00b2",
             "Area_ha": "15.4411 ha",
@@ -1817,6 +1820,7 @@
             "Part_Key": "part_0_0",
             "Boundary_Name": "Seletar boundary with 20m buffer",
             "Part_Label": "Part 3 of 3",
+            "Source_CRS": "WGS84 (EPSG:4326)",
             "Area_m2_raw": 144324.07912795577,
             "Area_m2": "144,324.08 m\u00b2",
             "Area_ha": "14.4324 ha",
@@ -1832,6 +1836,7 @@
   {
     "file_name": "Simco boundary with 20m buffer.shp",
     "layer_name": "Simco boundary with 20m buffer",
+    "source_crs": "WGS84 (EPSG:4326)",
     "feature_count": 4,
     "geometry_types": [
       "Polygon"
@@ -3976,6 +3981,7 @@
             "Part_Key": "part_0_1",
             "Boundary_Name": "Simco boundary with 20m buffer",
             "Part_Label": "Part 1 of 4",
+            "Source_CRS": "WGS84 (EPSG:4326)",
             "Area_m2_raw": 6097904.711204906,
             "Area_m2": "6,097,904.71 m\u00b2",
             "Area_ha": "609.7905 ha",
@@ -4226,6 +4232,7 @@
             "Part_Key": "part_0_3",
             "Boundary_Name": "Simco boundary with 20m buffer",
             "Part_Label": "Part 2 of 4",
+            "Source_CRS": "WGS84 (EPSG:4326)",
             "Area_m2_raw": 226634.35840257912,
             "Area_m2": "226,634.36 m\u00b2",
             "Area_ha": "22.6634 ha",
@@ -4360,6 +4367,7 @@
             "Part_Key": "part_0_2",
             "Boundary_Name": "Simco boundary with 20m buffer",
             "Part_Label": "Part 3 of 4",
+            "Source_CRS": "WGS84 (EPSG:4326)",
             "Area_m2_raw": 37386.00054872154,
             "Area_m2": "37,386.00 m\u00b2",
             "Area_ha": "3.7386 ha",
@@ -4490,6 +4498,7 @@
             "Part_Key": "part_0_0",
             "Boundary_Name": "Simco boundary with 20m buffer",
             "Part_Label": "Part 4 of 4",
+            "Source_CRS": "WGS84 (EPSG:4326)",
             "Area_m2_raw": 31323.528292994924,
             "Area_m2": "31,323.53 m\u00b2",
             "Area_ha": "3.1324 ha",
@@ -4598,6 +4607,10 @@
                         <div class="stat-tooltip">
                             <div class="tooltip-header">
                                 <i class="fa-solid fa-draw-polygon"></i> ${props.Boundary_Name || displayName} (${props.Part_Label || 'Part'})
+                            </div>
+                            <div class="tooltip-row">
+                                <span class="tooltip-key">Source CRS:</span>
+                                <span class="tooltip-val">${props.Source_CRS || 'WGS84 (EPSG:4326)'}</span>
                             </div>
                             <div class="tooltip-row">
                                 <span class="tooltip-key">Area (Hectares):</span>
@@ -4729,6 +4742,25 @@
             }
         }
 
+        // Clear active selection on map/table
+        function clearSelection() {
+            if (currentlySelectedKey) {
+                const prevKey = currentlySelectedKey;
+                currentlySelectedKey = null;
+                if (prevKey.startsWith('layer_')) resetLayer(prevKey);
+                else resetPart(prevKey);
+            }
+            const summaryDiv = document.querySelector('.leaflet-control-layers-list');
+            if (summaryDiv) {
+                summaryDiv.querySelectorAll('.summary-table-row').forEach(r => r.classList.remove('selected-row'));
+            }
+        }
+
+        // Clear active selection when clicking on empty map space
+        map.on('click', function(e) {
+            clearSelection();
+        });
+
         // Add Layer Control widget to top right
         const layerControlWidget = L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
 
@@ -4761,6 +4793,7 @@
                     <tr class="summary-table-row" data-layer-key="${layerKey}" style="cursor:pointer; border-bottom: 1px solid rgba(255,255,255,0.08);" title="Click to zoom to ${ldata.layer_name}">
                         <td style="padding:6px 8px; font-weight:500; color:#f8fafc;">
                             <span style="color:${layerColor}; font-size:0.9rem;">■</span> ${ldata.layer_name}
+                            <div style="font-size:0.7rem; color:#94a3b8;">${ldata.source_crs}</div>
                         </td>
                         <td style="padding:6px 8px; text-align:center; color:#cbd5e1; font-family:'JetBrains Mono', monospace;">${ldata.feature_count}</td>
                         <td style="padding:6px 8px; text-align:right; font-weight:700; color:#34d399; font-family:'JetBrains Mono', monospace;">${ldata.total_area_ha_str}</td>
@@ -4830,11 +4863,15 @@
                 const pKey = row.getAttribute('data-part-key');
 
                 row.addEventListener('click', function(e) {
-                    summaryDiv.querySelectorAll('.summary-table-row').forEach(r => r.classList.remove('selected-row'));
-                    row.classList.add('selected-row');
+                    const isAlreadySelected = row.classList.contains('selected-row');
+                    
+                    clearSelection();
 
-                    if (lKey) zoomToLayer(lKey);
-                    else if (pKey) zoomToPart(pKey);
+                    if (!isAlreadySelected) {
+                        row.classList.add('selected-row');
+                        if (lKey) zoomToLayer(lKey);
+                        else if (pKey) zoomToPart(pKey);
+                    }
                 });
 
                 row.addEventListener('mouseenter', function() {
@@ -4864,7 +4901,7 @@
         // Track cursor coordinates
         map.on('mousemove', function(e) {
             document.getElementById('coordsBar').innerText = 
-                `Lat: ${e.latlng.lat.toFixed(5)} | Lon: ${e.latlng.lng.toFixed(5)} | Zoom: ${map.getZoom()}`;
+                `Map CRS: WGS84 (EPSG:4326) | Lat: ${e.latlng.lat.toFixed(5)} | Lon: ${e.latlng.lng.toFixed(5)} | Zoom: ${map.getZoom()}`;
         });
     </script>
 </body>
